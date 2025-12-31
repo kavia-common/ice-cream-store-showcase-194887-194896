@@ -1,0 +1,139 @@
+.card {
+  /* Theme-aligned fallbacks (in case theme.css isn't present yet) */
+  --card-surface: var(--color-surface, #ffffff);
+  --card-text: var(--color-text, #111827);
+  --card-border: color-mix(in srgb, var(--card-text) 10%, transparent 90%);
+
+  --card-primary: var(--color-primary, #2563EB);
+
+  --card-radius-sm: 10px;
+  --card-radius-md: 12px;
+  --card-radius-lg: 16px;
+
+  --card-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --card-shadow-md: 0 8px 20px rgba(17, 24, 39, 0.08);
+  --card-shadow-hover: 0 14px 34px rgba(17, 24, 39, 0.12);
+
+  background: var(--card-surface);
+  color: var(--card-text);
+
+  border: 1px solid transparent;
+  border-radius: var(--card-radius-md);
+
+  display: block;
+  min-width: 0;
+
+  transition: box-shadow 160ms ease, transform 160ms ease, border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+/* Variants */
+.variant_default {
+  border-color: color-mix(in srgb, var(--card-border) 65%, transparent 35%);
+  box-shadow: none;
+}
+
+.variant_elevated {
+  border-color: transparent;
+  box-shadow: var(--card-shadow-sm);
+}
+
+.variant_outline {
+  border-color: color-mix(in srgb, var(--card-primary) 22%, var(--card-border) 78%);
+  box-shadow: none;
+  background: color-mix(in srgb, var(--card-surface) 92%, var(--card-primary) 8%);
+}
+
+/* Optional shadow prop (can be combined with any variant) */
+.shadow {
+  box-shadow: var(--card-shadow-md);
+}
+
+/* Padding tokens (responsive) */
+.padding_sm {
+  padding: 12px;
+}
+
+.padding_md {
+  padding: 16px;
+}
+
+.padding_lg {
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .padding_sm {
+    padding: 14px;
+  }
+
+  .padding_md {
+    padding: 20px;
+  }
+
+  .padding_lg {
+    padding: 24px;
+  }
+}
+
+/* Radius tokens */
+.radius_sm {
+  border-radius: var(--card-radius-sm);
+}
+
+.radius_md {
+  border-radius: var(--card-radius-md);
+}
+
+.radius_lg {
+  border-radius: var(--card-radius-lg);
+}
+
+/* Sections */
+.header {
+  margin: 0;
+  padding: 0;
+}
+
+.body {
+  min-width: 0;
+}
+
+.footer {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--card-border) 55%, transparent 45%);
+}
+
+/* When consumer uses Card.Header/Footer without Card padding on the root,
+   they may want their own spacing. We intentionally keep section styles minimal. */
+
+/* Hover elevation (only when hover=true) */
+.hover:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Clickable / focus styles:
+   - If Card renders as <a> or is made focusable/clickable by props,
+     maintain a visible focus ring consistent with Button conventions. */
+.clickable:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--card-primary) 35%, transparent 65%);
+  outline-offset: 3px;
+}
+
+/* If the card is an anchor, preserve the "link look" suppression by default */
+.card[href] {
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .hover:hover {
+    transform: none;
+  }
+}
