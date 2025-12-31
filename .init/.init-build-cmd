@@ -1,0 +1,4 @@
+{
+    "command": "npm install && npx tsc --noEmit && npm test -- --ci",
+    "working_directory": "/home/kavia/workspace/code-generation/ice-cream-store-showcase-194887-194896/ice_cream_store_frontend"
+}
